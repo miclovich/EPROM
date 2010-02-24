@@ -1,0 +1,8 @@
+MIDlet-1: Lec9-Alert, Lec9-Alert.png, printerMidlet
+MIDlet-Jar-Size: 956
+MIDlet-Jar-URL: Lec9-Alert.jar
+MIDlet-Name: Lec9-Alert
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

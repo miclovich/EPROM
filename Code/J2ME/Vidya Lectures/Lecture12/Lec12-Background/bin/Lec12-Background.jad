@@ -1,0 +1,8 @@
+MIDlet-1: Lec12-Background, Lec12-Background.png, MyGame
+MIDlet-Jar-Size: 100
+MIDlet-Jar-URL: Lec12-Background.jar
+MIDlet-Name: Lec12-Background
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

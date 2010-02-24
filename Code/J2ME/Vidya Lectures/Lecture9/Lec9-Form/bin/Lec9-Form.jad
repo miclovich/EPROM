@@ -1,0 +1,8 @@
+MIDlet-1: Lec9-Form, Lec9-Form.png, printerMidlet
+MIDlet-Jar-Size: 3091
+MIDlet-Jar-URL: Lec9-Form.jar
+MIDlet-Name: Lec9-Form
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

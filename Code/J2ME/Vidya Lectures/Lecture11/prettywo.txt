@@ -1,0 +1,378 @@
+C:karaokeprettywo.mid:
+
+0:00:00.000	Trackname "Pretty Woman (Roy Orbison)"
+0:00:00.000	Trackname "Soft Karaoke"
+0:00:00.000	Text "@KMIDI KARAOKE FILE"
+0:00:00.000	Text "@V0100"
+0:00:00.000	Text "@IThis file has been created with MID2KAR"
+0:00:00.000	Text "@IKaraoke files converter and editor"
+0:00:00.000	Text "@I(c) 1995 Vincenzo Palleschi"
+0:00:00.000	Trackname "Words"
+0:00:00.000	Text "@LENGL"
+0:00:00.000	Text "@TPRETTYWO"
+0:00:00.000	Trackname "Kick Drm"
+0:00:00.000	Trackname "Snare   "
+0:00:00.000	Trackname "Clsd Hat"
+0:00:00.000	Trackname "Ride Cym"
+0:00:00.000	Trackname "Tom Tom "
+0:00:00.000	Trackname "Bass Gtr"
+0:00:00.000	Trackname "Guitar 1"
+0:00:00.000	Trackname "Guitar 2"
+0:00:00.000	Trackname "Guitar 3"
+0:00:00.000	Trackname "Guitar 4"
+0:00:00.000	Trackname "Ac.Piano"
+0:00:00.000	Trackname "Grp Vox "
+0:00:00.000	Trackname "Lead Vox"
+
+
+
+0:00:19.481	Text "Pretty "
+0:00:19.950	Text "woman "
+
+0:00:21.356	Text "walkin down "
+0:00:22.176	Text "the "
+0:00:22.528	Text "street, "
+
+0:00:23.231	Text "Pretty "
+
+0:00:23.700	Text "woman "
+
+0:00:24.754	Text "the "
+
+0:00:25.106	Text "kind "
+
+0:00:25.340	Text "I'd "
+
+0:00:25.575	Text "like "
+
+0:00:25.926	Text "to "
+
+0:00:26.278	Text "meet, "
+
+0:00:26.981	Text "Pretty "
+
+0:00:27.450	Text "woman "
+
+0:00:29.676	Text "I "
+
+0:00:30.145	Text "don't "
+
+0:00:30.262	Text "believe "
+
+0:00:30.965	Text "you're"
+
+0:00:31.668	Text "not "
+
+0:00:31.785	Text "the "
+
+0:00:32.020	Text "truth, "
+
+0:00:33.075	Text "no "
+
+0:00:33.426	Text "one "
+
+0:00:33.660	Text "could "
+
+0:00:33.895	Text "look "
+
+0:00:34.364	Text "as "
+
+0:00:34.832	Text "good "
+
+0:00:35.301	Text "as "
+
+0:00:35.770	Text "you, "
+
+0:00:36.825	Text " "
+
+0:00:39.403	Text "Mercy, "
+
+0:00:41.278	Text " "
+
+0:00:44.559	Text "Pretty "
+
+0:00:45.145	Text "woman, "
+
+0:00:46.551	Text "wont "
+
+0:00:46.785	Text "you "
+
+0:00:47.020	Text "pardon "
+
+0:00:47.723	Text "me, "
+
+0:00:48.426	Text "Pretty "
+
+0:00:48.895	Text "woman, "
+
+0:00:49.950	Text "I "
+
+0:00:50.301	Text "couldn t "
+
+0:00:50.887	Text "help "
+
+0:00:51.239	Text "but "
+
+0:00:51.473	Text "see, "
+
+0:00:52.176	Text "Pretty "
+
+0:00:52.645	Text "woman, "
+
+0:00:54.989	Text "And "
+
+0:00:55.106	Text "you "
+
+0:00:55.457	Text "look "
+
+0:00:55.575	Text "lovely "
+
+0:00:56.629	Text "as "
+
+0:00:57.098	Text "can "
+
+0:00:57.332	Text "be, "
+
+0:00:58.504	Text "Are "
+
+0:00:58.973	Text "you "
+
+0:00:59.090	Text "lonely "
+
+0:01:00.262	Text "just "
+
+0:01:00.848	Text "like "
+
+0:01:01.082	Text "me, "
+
+0:01:02.371	Text " "
+
+0:01:10.575	Text "Pretty "
+
+0:01:11.395	Text "woman, "
+
+0:01:12.332	Text "stop "
+
+0:01:12.684	Text "a "
+
+0:01:13.035	Text "while, "
+
+0:01:14.676	Text "Pretty "
+
+0:01:15.145	Text "woman, "
+
+0:01:16.082	Text "take "
+
+0:01:16.434	Text "a "
+
+0:01:16.668	Text "while, "
+
+0:01:18.426	Text "Pretty "
+
+0:01:18.895	Text "woman "
+
+0:01:19.950	Text "give "
+
+0:01:20.184	Text "your "
+
+0:01:20.535	Text "smile "
+
+0:01:21.239	Text "to "
+
+0:01:21.707	Text "me, "
+
+0:01:24.989	Text " "
+
+0:01:25.457	Text "Pretty "
+
+0:01:26.395	Text "woman, "
+
+0:01:27.332	Text "Yeah "
+
+0:01:27.684	Text "Yeah "
+
+0:01:28.035	Text "Yeah "
+
+0:01:29.676	Text "Pretty "
+
+0:01:30.262	Text "woman, "
+
+0:01:31.082	Text "look "
+
+0:01:31.434	Text "my "
+
+0:01:31.668	Text "way "
+
+0:01:33.426	Text "Pretty "
+
+0:01:33.895	Text "woman, "
+
+0:01:34.832	Text "say "
+
+0:01:35.184	Text "you'll "
+
+0:01:35.418	Text "stay "
+
+0:01:35.887	Text "with "
+
+0:01:36.590	Text "me, "
+
+0:01:38.582	Text " "
+
+0:01:39.168	Text " cause "
+
+0:01:40.106	Text "I "
+
+0:01:40.340	Text "need "
+
+0:01:41.160	Text "you, "
+
+0:01:42.801	Text "I'll "
+
+0:01:43.270	Text "treat "
+
+0:01:43.973	Text "you "
+
+0:01:44.207	Text "right, "
+
+0:01:46.785	Text "come "
+
+0:01:47.137	Text "with "
+
+0:01:47.606	Text "me "
+
+0:01:48.075	Text "Baby, "
+
+0:01:50.301	Text "be "
+
+0:01:50.770	Text "mine "
+
+0:01:51.356	Text "tonight, "
+
+0:01:57.332	Text " "
+
+0:01:58.739	Text "Pretty "
+
+0:01:59.207	Text "woman, "
+
+0:02:00.614	Text "don't "
+
+0:02:01.082	Text "walk "
+
+0:02:01.434	Text "on "
+
+0:02:01.785	Text "by, "
+
+0:02:02.489	Text "Pretty "
+
+0:02:02.957	Text "woman, "
+
+0:02:04.364	Text "don't "
+
+0:02:04.832	Text "make "
+
+0:02:05.184	Text "me "
+
+0:02:05.535	Text "cry "
+
+0:02:06.239	Text "Pretty "
+
+0:02:06.707	Text "woman "
+
+0:02:09.403	Text "don't "
+
+0:02:09.637	Text "walk "
+
+0:02:09.989	Text "away "
+
+0:02:11.512	Text "Hey, "
+
+0:02:13.270	Text "(pause) "
+
+0:02:14.793	Text "Okay "
+
+0:02:16.551	Text "(pause) "
+
+0:02:18.309	Text "If "
+
+0:02:18.543	Text "that s "
+
+0:02:18.778	Text "the "
+
+0:02:19.012	Text "way "
+
+0:02:19.364	Text "it "
+
+0:02:19.598	Text "must "
+
+0:02:19.832	Text "be "
+
+0:02:20.653	Text "Okay "
+
+0:02:24.168	Text "I "
+
+0:02:24.285	Text "guess "
+
+0:02:24.403	Text "I'll "
+
+0:02:24.637	Text "go "
+
+0:02:24.871	Text "on "
+
+0:02:25.340	Text "home "
+
+0:02:26.160	Text "it s "
+
+0:02:26.512	Text "late, "
+
+0:02:27.684	Text "there ll "
+
+0:02:27.918	Text "be "
+
+0:02:28.153	Text "tomorrow "
+
+0:02:28.973	Text "night "
+
+0:02:29.793	Text "but "
+
+0:02:30.262	Text "wait, "
+
+0:02:31.434	Text "what "
+
+0:02:31.668	Text "do "
+
+0:02:31.785	Text "I "
+
+0:02:32.020	Text "see, "
+
+0:02:38.231	Text "is "
+
+0:02:39.285	Text "she "
+
+0:02:39.520	Text "walking "
+
+0:02:40.457	Text "back "
+
+0:02:40.926	Text "to "
+
+0:02:41.395	Text "me "
+
+0:02:44.793	Text "Yeah! "
+
+0:02:46.785	Text "She s "
+
+0:02:47.020	Text "walking "
+
+0:02:48.075	Text "back "
+
+0:02:48.660	Text "to "
+
+0:02:49.012	Text "me, "
+
+0:02:52.528	Text "Ooohhh, "
+
+0:02:56.043	Text "Pretty "
+
+0:02:56.512	Text "woman. "
+0:02:56.512	Text " "
+0:02:57.044	** end song

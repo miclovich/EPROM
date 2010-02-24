@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+    version="1.1" baseProfile="tiny"
+    viewBox="0 0 30 30">
+    <desc>Example SVG file</desc>
+        <rect x="0" y="10" width="30" height="10" fill="blue"/>
+        <rect x="10" y="7" width="10" height="20" fill="red"/>
+	
+</svg>  

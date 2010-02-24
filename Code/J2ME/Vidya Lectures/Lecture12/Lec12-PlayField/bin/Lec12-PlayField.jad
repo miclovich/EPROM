@@ -1,0 +1,8 @@
+MIDlet-1: Lec12-PlayField, Lec12-PlayField.png, MyGame
+MIDlet-Jar-Size: 3892
+MIDlet-Jar-URL: Lec12-PlayField.jar
+MIDlet-Name: Lec12-PlayField
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

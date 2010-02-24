@@ -1,0 +1,6 @@
+MIDlet-1: lec9_Gauge, lec9_Gauge.png, printerMidlet
+MIDlet-Name: lec9_Gauge
+MIDlet-Vendor: Unknown
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0

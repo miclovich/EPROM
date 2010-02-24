@@ -1,0 +1,372 @@
+import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.game.Sprite;
+import javax.microedition.lcdui.game.GameCanvas;
+import javax.microedition.lcdui.game.TiledLayer;
+import javax.microedition.lcdui.game.LayerManager;
+import java.util.Timer;
+import java.util.Random;
+import java.io.IOException;
+
+public class MyGameCanvas  extends GameCanvas implements Runnable {
+
+	public MyGameCanvas() {
+		super(true);
+	}
+
+	public void start() {
+
+		try {
+
+		  // create and load an image to the center
+
+		  pokemonImg = Image.createImage("/blinky.png");
+		  centerX = CENTER_X;
+		  centerY = BASE;
+
+		  // create the pokemon sprite
+		  pokemonSprite = new Sprite(pokemonImg, 28, 36);
+
+		  // and define its reference pixel
+		  pokemonSprite.defineReferencePixel(
+				pokemonSprite.getWidth()/2, pokemonSprite.getHeight());
+
+		  // creates the layermanager
+		  layerManager = new LayerManager();
+
+		  // and adds layers to it
+		  layerManager.append(pokemonSprite);
+
+		  // creates the game background
+		  generateGameBackground();
+
+		  layerManager.append(background);
+
+		  // create the car sprite thread and start it
+		  carSprite = new CarSprite(this);
+		  carSprite.start();
+
+		} catch(IOException ioex) { System.err.println(ioex); }
+
+		// finally execute the current thread
+		Thread runner = new Thread(this);
+		runner.start();
+
+	}
+
+	public void run() {
+
+		// before going in the loop,
+		// start the gametimer 
+		gameTimer = new GameTimer(25);
+		new Timer().schedule(gameTimer, 0, 1000);
+
+		while(!stop) { // infinite loop
+
+  		// based on the structure
+
+  		// first verify game state
+  		checkGameState();
+
+  		// check user's input
+  		checkUserInput();
+
+  		// update screen
+  		updateGameScreen(getGraphics());
+
+		// and sleep, this controls
+		// how fast refresh is done
+		try {
+		    Thread.currentThread().sleep(25);
+			} catch(Exception e) {}
+
+		}
+
+		showGameScore(getGraphics());
+
+	}
+
+	// creates the background using TiledLayer
+	private void generateGameBackground() throws IOException {
+	// load the image
+	bkndImg = Image.createImage("/bknd.png");
+
+	// create the tiledlayer background
+	background = new TiledLayer(5, 8, bkndImg, 32, 32);
+
+	// array that specifies what image goes where
+	int[] cells = {
+	    1, 1, 1, 1, 1, // clouds
+	    1, 1, 1, 1, 1, // clouds
+	    1, 1, 1, 1, 1, // clouds
+	    2, 2, 2, 2, 2, // lawn
+	    2, 2, 2, 2, 2, // lawn
+	    3, 3, 3, 3, 3, // water
+	    3, 3, 3, 3, 3, // water
+	    3, 3, 3, 3, 3  // water
+	};
+
+	// set the background with the images
+	for (int i = 0; i < cells.length; i++) {
+	    int col = i % 5;
+	    int row = (i - col)/5;
+	    background.setCell(col, row, cells[i]);
+	}
+
+	// set the location of the background
+	background.setPosition(PLAYFIELD_ORIGIN_X, PLAYFIELD_ORIGIN_Y);
+
+
+	}
+
+	// builds the game borders and background
+	private void buildGameScreen(Graphics g) {
+
+		// set the drawing color to black
+		g.setColor(0x000000);
+
+		// draw the surrounding rectangle
+		g.drawRect(PLAYFIELD_ORIGIN_X, PLAYFIELD_ORIGIN_Y, PLAYFIELD_WIDTH, PLAYFIELD_HEIGHT);
+
+		// draw the base line
+		g.drawLine(PLAYFIELD_ORIGIN_X, BASE, PLAYFIELD_ORIGIN_X + PLAYFIELD_WIDTH, BASE);
+
+		// draw the maximum line upto which pokemon can jump up to
+		g.drawLine(PLAYFIELD_ORIGIN_X, BASE - MAX_HEIGHT, PLAYFIELD_ORIGIN_X + PLAYFIELD_WIDTH, BASE - MAX_HEIGHT);
+
+
+		showTimeLeft(g);
+
+	}
+
+	private void checkGameState() {
+
+		// first check if the game is over
+		if(gameTimer.getTimeLeft() == 0) {
+			stop = true;
+			return;
+		}
+
+		// game not over, check for collisions
+		carSprite.checkForCollision();
+	}
+
+	private void checkUserInput() {
+
+		// get the state of keys
+		int keyState = getKeyStates();
+
+		// calculate the position for x axis
+		calculateCenterX(keyState);
+
+		// this doesn't really depend on the users input
+		calculateCenterY(keyState);
+
+	}
+
+	private void updateGameScreen(Graphics g) {
+
+	    // the next two lines clear the background
+	    g.setColor(0xffffff);
+	    g.fillRect(0, 0, getWidth(), getHeight());
+
+	    // creates the game borders
+	    buildGameScreen(g);
+
+	    // animates the sprite
+	    pokemonSprite.nextFrame();
+
+	    // moves the sprite based on its reference pixel
+	    pokemonSprite.setRefPixelPosition(centerX, centerY);
+
+	    // the manager paints all the layers
+	    layerManager.paint(g, 0, 0);
+
+	    // this call paints off screen buffer to screen
+	    flushGraphics();
+
+	}
+
+	private void showTimeLeft(Graphics g) {
+
+		// what does the clock say
+		int timeLeft = gameTimer.getTimeLeft();
+
+		// if less than 6 seconds left
+		// flicker time with red and black
+		if(timeLeft < 6) {
+			if((timeLeft % 2) == 0)
+			  g.setColor(0xff0000);
+			else
+			  g.setColor(0x000000);
+		}
+
+		// draw the time left string
+		g.drawString("Game Time Remaining: " + timeLeft + " seconds", 0, 0, 0);
+
+		// reset the color
+		g.setColor(0x000000);
+
+	}
+
+	// at the end of the game show the score
+	private void showGameScore(Graphics g) {
+
+		// create a base rectangle
+		g.setColor(0xffffff);
+		g.fillRect(0, CENTER_Y - 20, getWidth(), 40);
+
+		g.setColor(0x000000);
+
+	  // and show the score
+	  g.drawString("GAME OVER! You hit " +
+	    carSprite.getCarsHit() + " cars.",
+	    CENTER_X, CENTER_Y,
+	    Graphics.HCENTER | Graphics.BASELINE);
+
+	  flushGraphics();
+	}
+
+	private void calculateCenterX(int keyState) {
+
+		// determines which way to move and changes the
+		// x coordinate accordingly
+		if((keyState & LEFT_PRESSED) != 0) {
+				centerX =
+				  Math.max(PLAYFIELD_ORIGIN_X + pokemonSprite.getWidth()/2, centerX - dx);
+		}
+		else if((keyState & RIGHT_PRESSED) != 0) {
+				centerX =  Math.min(PLAYFIELD_ORIGIN_X + PLAYFIELD_WIDTH - pokemonSprite.getWidth()/2, centerX + dx);;
+		}
+
+	}
+
+	// this method makes pokemon jump to random heights
+
+	// the keystate is not required in this case as the users
+	// input has no implication
+	private void calculateCenterY(int keyState) {
+
+		// check if pokemon is on the way up
+		if(up) {
+
+			// if yes, see if they have reached the current jump height
+			if((centerY > (BASE - jumpHeight + pokemonSprite.getHeight()))) {
+
+			  // if not, continue moving them up
+			  centerY -= dy;
+			} else if(centerY == (BASE - jumpHeight + pokemonSprite.getHeight())) {
+
+				// if yes, start moving them down
+				centerY += dy;
+
+				// and change the flag
+				up = false;
+			}
+
+		} else {
+
+			// pokemon is on its way down
+			if(centerY < BASE) {
+
+				// no, so keep moving them down
+				centerY += dy;
+
+			} else if(centerY == BASE) {
+
+				// have reached base, so calculate a new
+				// jump height which is not more than MAX_HEIGHT
+				int hyper = random.nextInt(MAX_HEIGHT + 1);
+
+			  // but make sure that this it is atleast greater than the image height
+			  if(hyper > pokemonSprite.getHeight()) jumpHeight = hyper;
+
+				// move the image up
+				centerY -= dy;
+
+				// and reset the flag
+				up = true;
+
+			}
+		}
+
+	}
+
+	// accessor methods
+	public Sprite getPokemonSprite() {
+		return this.pokemonSprite;
+	}
+
+  public LayerManager getManager() {
+		return this.layerManager;
+	}
+
+	public Random getRandom() {
+		return this.random;
+	}
+
+	// the center of the screen
+	public final int CENTER_X = getWidth()/2;
+	public final int CENTER_Y = getHeight()/2;
+
+	// the game boundary
+	public static final int PLAYFIELD_WIDTH = 160;
+	public static final int PLAYFIELD_HEIGHT = 256;
+
+	// the shifted x,y origin of the game
+	public final int PLAYFIELD_ORIGIN_X = (getWidth() - PLAYFIELD_WIDTH)/2;
+	public final int PLAYFIELD_ORIGIN_Y = (getHeight() - PLAYFIELD_HEIGHT)/2;
+
+	// the height of sections below and above pokemon
+	public final int SEGMENT_SPACE = 96;
+
+	// the base on which the pokemon will move
+	public final int BASE = PLAYFIELD_ORIGIN_Y + PLAYFIELD_HEIGHT - SEGMENT_SPACE;
+
+	// the max height pokemon can jump
+	public final int MAX_HEIGHT = 64;
+
+	// pokemon image
+	private Image pokemonImg;
+
+	// pokemon sprite
+	private Sprite pokemonSprite;
+
+	// the background tiled image
+	private Image bkndImg;
+
+	// the background using a tiledlayer
+	private TiledLayer background;
+
+	// the image coordinates
+	private int centerX;
+	private int centerY;
+
+	// the distance to move in the x axis
+	private int dx = 1;
+
+	// the distance to move in the y axis
+	private int dy = 1;
+
+	// a flag to indicate which direction pokemon is moving
+	private boolean up = true;
+
+	// indicates the random jump height, calculated for every jump
+	private int jumpHeight = MAX_HEIGHT;
+
+	// random number generator
+	public Random random = new Random();
+
+	// LayerManager
+	private LayerManager layerManager;
+
+	// the car sprite handler
+	private BallSprite ballSprite;
+
+	// the game timer
+	private GameTimer gameTimer;
+
+	// the flag that tells the game to stop
+	private boolean stop = false;
+
+}

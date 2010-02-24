@@ -1,0 +1,186 @@
+import java.util.*;
+import java.io.*;
+import javax.microedition.midlet.*;
+import javax.microedition.lcdui.*;
+import javax.microedition.io.*;
+
+public class PushMidlet extends MIDlet implements CommandListener,Runnable {
+
+
+    String midletClassName  = this.getClass().getName();
+    String url = "socket://:6000";
+    String filter = "*";
+    long deltaTime = 15000;
+    long WakeupTime = 1000*60*5; // every 5 minutes
+
+    //  User Interface related
+    private Command alarmCommand = new Command("Alarm Schedule",Command.SCREEN, 1 );
+    private Command registerCommand = new Command("Register Connection",Command.SCREEN, 2 );
+    private Command unregisterCommand= new Command("UnRegister Connection",Command.SCREEN, 3 );
+    private Command listConnectionsCommand = new Command("List Connections",Command.SCREEN, 4 );
+    private Command currentCommand;
+    protected Display display;
+    private Ticker ticker;
+    private Form form;
+
+
+    /** Constructor */
+    public PushMidlet() {
+    }
+
+    /**
+     *  Initial state.
+     *  @throw MIDletStateChangeException to indicate
+     *  a transient error has occured.
+     */
+    public void startApp() throws MIDletStateChangeException {
+	try {
+	    if (display == null) {
+		System.out.println("Setting up...");
+		display = Display.getDisplay(this);
+
+		ticker = new Ticker("");
+		form = new Form(" Push Test");
+		form.addCommand(alarmCommand);
+		form.addCommand(registerCommand);
+		form.addCommand(unregisterCommand);
+		form.addCommand(listConnectionsCommand);
+		form.setCommandListener(this);
+		form.setTicker(ticker);
+		display.setCurrent(form);
+
+		if (isPushActivated() == true) {
+		    ticker.setString("Push Is Activated!");
+		}
+	    }
+	}
+	catch(Exception e) {
+	    System.out.println("Exception during startApp()");
+	    e.printStackTrace();
+	}
+    }
+
+    /** Paused state. Release resources (connection, threads, etc). */
+    public void pauseApp() {
+	display = null;
+    }
+
+
+    public void destroyApp(boolean uc) throws
+	MIDletStateChangeException {
+	display = null;
+	try {
+	    //  Set up the alarm and force the MIDlet to exit.
+	    scheduleAlarmMidlet(deltaTime);
+	}
+	catch(ClassNotFoundException e) {
+	    System.out.println("No class found");
+	    e.printStackTrace();
+	}
+	catch(ConnectionNotFoundException e) {
+	    System.out.println("No conection found");
+	    e.printStackTrace();
+	}
+    }
+
+    /**
+     *  Command list listener.
+     */
+    public void commandAction(Command c, Displayable d) {
+	currentCommand = c;
+	//  Dispatch a thread to process commands.
+	if (c == alarmCommand || c == registerCommand || c == unregisterCommand || c == listConnectionsCommand) {
+	    Thread thread = new Thread(this);
+	    thread.start();
+	}
+    }
+
+    /** Thread run method. */
+    public void run() {
+	try {
+	    //  Do alarm or inbound connection test based
+	    //  on value of last Command
+	    if (currentCommand == alarmCommand) {
+		// cyclic background task info.
+		Timer aTimer = new Timer();
+		MyTask myTask = new MyTask();
+		aTimer.schedule(myTask, 0, deltaTime);
+	    }
+	    else
+		if (currentCommand == registerCommand) {
+		    //  Register connection
+		    PushRegistry.registerConnection(url, midletClassName, filter);
+		}
+		else
+		    if (currentCommand == unregisterCommand) {
+			//  Unregister connectioun
+			boolean status = PushRegistry.unregisterConnection(url);
+		    }
+		    else
+			if (currentCommand == listConnectionsCommand) {
+			    //  Display all push connections
+			    outputPushInfo();
+			}
+	}
+	catch(Exception e) {
+	    e.printStackTrace();
+	}
+    }
+
+    /**
+     *  Determine if activated due to inbound connection.
+     */
+    private boolean isPushActivated() {
+	//  Dispatch a PushProcessor for each inbound connection.
+
+	String[] connections =  PushRegistry.listConnections(true);
+	if (connections != null && connections.length > 0) {
+	    return(true);
+	}
+	return(false);
+    }
+
+    /**
+     *  Dispatch a PushProcessor to handle incoming
+     *  connections. 
+     */
+    private boolean handlePushActivation() {
+	String[] connections =  PushRegistry.listConnections(true);
+	if (connections != null && connections.length > 0) {
+	    System.out.println("Push Activated");
+	    for (int i=0; i < connections.length; i++) {
+		PushProcessor pp = new PushProcessor(connections[i]);
+	    }
+	    return(true);
+	}
+	return(false);
+    }
+
+    /**
+     * Display all push connection info
+     */
+    private void outputPushInfo() {
+	String[] connections = PushRegistry.listConnections(false);
+	if (connections != null && connections.length > 0) {
+	    for (int i=0; i < connections.length; i++) {
+		String midlet = PushRegistry.getMIDlet(connections[i]);
+		String filter = PushRegistry.getFilter(connections[i]);
+		System.out.println("PushInfo Connection: " +  connections[i] + " " + midlet + " " + filter);
+		form.append(connections[i] + " " + midlet + " " + filter);
+	    }
+	}
+    }
+
+    /**
+     *  Set up a push alarm event that expires in eventTime milliseconds
+     */
+    private void scheduleAlarmMidlet(long eventTime) throws ClassNotFoundException, ConnectionNotFoundException,  SecurityException {
+	Date alarm = new Date();
+	String midletClassName  = this.getClass().getName();
+	long t = PushRegistry.registerAlarm(midletClassName, alarm.getTime()+ eventTime);
+    }
+
+ 
+  
+
+} 

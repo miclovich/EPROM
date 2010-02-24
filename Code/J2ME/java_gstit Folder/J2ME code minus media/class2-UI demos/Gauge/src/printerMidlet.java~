@@ -1,0 +1,24 @@
+import javax.microedition.midlet.*; 
+import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Gauge; 
+import javax.microedition.lcdui.Display; 
+
+public class printerMidlet extends MIDlet {
+   private Form form;
+	private Gauge gauge;
+ 	public printerMidlet() {
+		form = new Form("Gauge Demo"); 
+//		gauge = new Gauge( "Continuous-Idle", false, Gauge.INDEFINITE, Gauge.CONTINUOUS_IDLE); 	
+//		gauge = new Gauge( "Interactive", true, 3, 1); 	
+
+
+		form.append(gauge); 
+	}
+
+	public void startApp() {
+		Display.getDisplay(this).setCurrent(form); 
+   }
+	public void pauseApp() {}
+	public void destroyApp(boolean unconditional) {
+	}
+}

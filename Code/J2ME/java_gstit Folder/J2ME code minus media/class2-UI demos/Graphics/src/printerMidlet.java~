@@ -1,0 +1,29 @@
+import javax.microedition.lcdui.Canvas; 
+import javax.microedition.midlet.*; 
+import javax.microedition.lcdui.Display; 
+import javax.microedition.lcdui.Graphics; 
+import javax.microedition.lcdui.Image;
+
+public class CanvasDemo extends MIDlet { 
+		Canvas canvas; 
+		Image img.
+		public CanvasDemo() {
+			 canvas = new canvas(); 
+			 img = Image.createImage("/copyright.png");
+		} 
+		public void startApp() {
+	 	       Display display = Display.getDisplay(this); 
+			display.setCurrent(canvas); 
+			canvas.repaint(); 
+		} 
+		public void pauseApp() { } 
+		public void destroyApp(boolean unconditional) { } 
+} 
+class canvas extends Canvas { 
+	public void paint(Graphics g) { 
+		g.setColor(0xffffff); 
+		g.fillRect(0, 0, getWidth(), getHeight()); 
+		g.drawImage(img, 0, 0, HCENTER);
+
+  }
+} 

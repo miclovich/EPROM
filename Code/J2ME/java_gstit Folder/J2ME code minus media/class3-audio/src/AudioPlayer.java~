@@ -1,0 +1,151 @@
+import javax.microedition.midlet.MIDlet;
+
+import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.List;
+import javax.microedition.lcdui.Form;
+
+import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Command;
+import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.CommandListener;
+
+import javax.microedition.media.Player;
+import javax.microedition.media.Control;
+import javax.microedition.media.Manager;
+import javax.microedition.media.PlayerListener;
+
+public class AudioPlayer extends MIDlet
+  implements CommandListener, PlayerListener {
+
+  private Display display;
+  private List itemList;
+  private Form form;
+
+  private Command stop;
+  private Command pause;
+  private Command start;
+
+
+  private Player player;
+
+  public AudioPlayer() {
+    display = Display.getDisplay(this);
+    // creates an item list to select multimedia files to play
+    itemList = new List("Select an audio track", List.IMPLICIT);
+
+    // stop, pause and restart commands
+    stop = new Command("Stop", Command.STOP, 1);
+    pause = new Command("Pause", Command.ITEM, 1);
+    start = new Command("Start", Command.ITEM, 1);
+
+    // a form to display when items are being played
+    form = new Form("Playing audio now...");
+
+    // the form acts as the interface to stop and pause the media
+    form.addCommand(stop);
+    form.addCommand(pause);
+    form.setCommandListener(this);
+
+
+  }
+
+  public void startApp() {
+x
+    itemList.append("Let it Be - Beatles", null);
+    itemList.setCommandListener(this);
+
+    // show the list when MIDlet is started
+    display.setCurrent(itemList);
+  }
+
+  public void pauseApp() {
+    // pause the player
+    try {
+      if(player != null) player.stop();
+    } catch(Exception e) {}
+  }
+
+  public void destroyApp(boolean unconditional) {
+    if(player != null) player.close(); // close the player
+  }
+
+  public void commandAction(Command command, Displayable disp) {
+
+
+    // if list is displayed, the user wants to play the item
+    if(disp instanceof List) {
+      List list = ((List)disp);
+
+      String key = list.getString(list.getSelectedIndex());
+
+      // Play the selected audio file
+      try {
+	playMedia(key);
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+      }
+    } else if(disp instanceof Form) {
+
+      // if the form is being displayed, then the media is being played and the commands are stop and pause
+      try {
+
+        if(command == stop) { // if stopping the media play
+
+          player.close(); // close the player
+          display.setCurrent(itemList); // redisplay the list of media
+          form.removeCommand(start); // remove the start command
+          form.addCommand(pause); // add the pause command
+
+        } else if(command == pause) { // if pausing
+
+          player.stop(); // pauses the media, note that it is called stop
+          form.removeCommand(pause); // remove the pause command
+          form.addCommand(start); // add the start (restart) command
+        } else if(command == start) { // if restarting
+
+          player.start(); // starts from where the last pause was called
+          form.removeCommand(start);
+          form.addCommand(pause);
+        }
+      } catch(Exception e) {
+        System.err.println(e);
+      }
+    }
+
+  }
+private void playMedia(String key) throws Exception {
+
+    // specify the audio file. Note it resides in the res subfolder.
+
+    String file = null;
+    if (key.equals("Let it Be - Beatles"))
+	file = "/letitbe.wav";
+
+    // create the player by specifying a resource and audio type
+    player = Manager.createPlayer(getClass().getResourceAsStream(file), "audio/x-wav");
+  
+    // a listener to handle player events like starting, closing etc
+    player.addPlayerListener(this);
+
+    player.setLoopCount(-1); // play indefinitely
+    player.prefetch(); // prefetch
+    player.realize(); // realize
+
+    player.start(); // and start
+  }
+
+  /* Handle player events */
+  public void playerUpdate(Player player, String event, Object eventData) {
+
+    // if the player has started AND start event is 0, then display the form.
+    if(event.equals(PlayerListener.STARTED) &&
+      new Long(0L).equals((Long)eventData)) {
+
+      display.setCurrent(form);
+    } else if(event.equals(PlayerListener.CLOSED)) {
+
+      form.deleteAll();
+    }
+  }
+}

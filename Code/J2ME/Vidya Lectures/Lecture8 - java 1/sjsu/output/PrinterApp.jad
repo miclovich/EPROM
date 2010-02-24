@@ -1,0 +1,6 @@
+MIDlet-Name: MIDlet examples
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: Vidya Setlur
+MIDlet-Jar-URL: PrinterApp.jar
+MIDlet-Jar-Size: 1445
+MIDlet-1: PrinterApplication, ,PrinterApp

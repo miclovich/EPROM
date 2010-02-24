@@ -1,0 +1,21 @@
+import javax.microedition.midlet.MIDlet; 
+import javax.microedition.lcdui.TextBox; 
+import javax.microedition.lcdui.TextField; 
+import javax.microedition.lcdui.Display; 
+
+public class printerMidlet extends MIDlet {
+    private TextBox textBox; 
+    public printerMidlet() {
+	txtBox1 = new TextBox( "Your Name?", "", 60,
+			       TextField.ANY); 
+    }
+
+    public void startApp() {
+	Display.getDisplay(this).setCurrent(textbox);
+    }
+
+    public void pauseApp() {}
+    public void destroyApp(boolean unconditional) {
+    }
+}
+

@@ -1,0 +1,19 @@
+import javax.microedition.midlet.MIDlet; 
+import javax.microedition.lcdui.Alert; 
+import javax.microedition.lcdui.Display; 
+
+public class printerMidlet extends MIDlet {
+   Alert printAlert; 
+	public printerMidlet() {
+		printAlert = new Alert("Alert!"); 
+		printAlert.setString(“print message”); 
+	}
+
+	public void startApp() {
+		Display.getDisplay(this).setCurrent(printAlert); 
+   	}
+
+	public void pauseApp() {}
+	public void destroyApp(boolean unconditional) {
+	}
+}
