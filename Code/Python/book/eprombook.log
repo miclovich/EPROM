@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2010.1.30)  26 FEB 2010 14:49
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=latex 2010.1.30)  26 FEB 2010 15:18
 entering extended mode
  %&-line parsing enabled.
 **eprombook.tex
@@ -138,14 +138,30 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
  [3] [4
 
-] [5] [6] (./eprombook.aux) ) 
-Here is how much of TeX's memory you used:
- 1183 strings out of 494726
- 13624 string characters out of 3170757
- 60693 words of memory out of 3000000
- 4429 multiletter control sequences out of 15000+200000
- 10501 words of font info for 39 fonts, out of 3000000 for 9000
- 188 hyphenation exceptions out of 8191
- 27i,6n,22p,226b,193s stack positions out of 5000i,500n,10000p,200000b,50000s
+] [5] [6]
+Chapter 1.
+[7
 
-Output written on eprombook.dvi (6 pages, 1184 bytes).
+] [8
+
+] [9] [10]
+Chapter 2.
+[11
+
+] [12
+
+] [13] [14] [15
+
+] [16] [17
+
+] [18] (./eprombook.aux) ) 
+Here is how much of TeX's memory you used:
+ 1202 strings out of 494726
+ 13827 string characters out of 3170757
+ 60693 words of memory out of 3000000
+ 4445 multiletter control sequences out of 15000+200000
+ 13420 words of font info for 51 fonts, out of 3000000 for 9000
+ 188 hyphenation exceptions out of 8191
+ 27i,6n,22p,234b,189s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on eprombook.dvi (18 pages, 3864 bytes).
