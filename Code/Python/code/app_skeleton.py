@@ -28,7 +28,6 @@ def exit_key_handler():
 appuifw.app.title = u"drawing"    
  
 app_lock = e32.Ao_lock()
-
 appuifw.app.body = ... 
 
 appuifw.app.exit_key_handler = exit_key_handler
